@@ -33,7 +33,7 @@ resource "aws_lb_listener" "http" {
 module "records" {
   source  = "terraform-aws-modules/route53/aws//modules/records"
 
-  zone_name = var.zone_name #daws81s.online
+  zone_name = var.zone_name #kamineni.site
   records = [
     {
       name    = "*.app-${var.environment}" # *.app-dev
