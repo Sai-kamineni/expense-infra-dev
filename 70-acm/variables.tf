@@ -16,7 +16,7 @@ variable "common_tags" {
 
 
 variable "zone_name" {
-    default = "daws81s.online"
+    default = "kamineni.site"
 }
 
 variable "zone_id" {
