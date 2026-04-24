@@ -1,4 +1,4 @@
-module "backend" {
+module "backend" {                    #creating backend ec2 instance
   source  = "terraform-aws-modules/ec2-instance/aws"
   ami = data.aws_ami.joindevops.id
   name = local.resource_name
@@ -18,6 +18,7 @@ module "backend" {
 
 resource "null_resource" "backend" {
   # Changes to any instance of the cluster requires re-provisioning
+  #If any changes happend in the above backend instance this null resource will trigger
   triggers = {
     instance_id = module.backend.id
   }
@@ -32,7 +33,7 @@ resource "null_resource" "backend" {
   }
 
   provisioner "file" {
-    source      = "${var.backend_tags.Component}.sh"
+    source      = "${var.backend_tags.Component}.sh"       #backend.sh   #copy the file from local to server location
     destination = "/tmp/backend.sh"
   }
 
@@ -58,8 +59,8 @@ resource "aws_ami_from_instance" "backend" {
   depends_on = [aws_ec2_instance_state.backend]
 }
 
+#we have only stopped or deleted option in aws_ec2_instance_state, so we use null resource to terminate the instance
 resource "null_resource" "backend_delete" {
-  # Changes to any instance of the cluster requires re-provisioning
   triggers = {
     instance_id = module.backend.id
   }
