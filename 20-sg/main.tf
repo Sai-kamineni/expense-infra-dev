@@ -165,7 +165,7 @@ resource "aws_security_group_rule" "ansible_public" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  cidr_blocks = ["0.0.0.0/0"]    #we should give our company IP address
   security_group_id = module.ansible_sg.id
 }
 
