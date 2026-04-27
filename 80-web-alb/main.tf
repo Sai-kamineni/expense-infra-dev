@@ -33,7 +33,7 @@ resource "aws_lb_listener" "http" {
 resource "aws_lb_listener" "https" {
   load_balancer_arn = module.web_alb.arn
   port              = "443"
-  protocol          = "HTTPS"
+  protocol          = "HTTPS"                 #To accept connection from HTTPS we need certificate
   ssl_policy        = "ELBSecurityPolicy-2016-08"
   certificate_arn   = local.https_certificate_arn
 

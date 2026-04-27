@@ -125,7 +125,7 @@ resource "aws_autoscaling_group" "backend" {
   
   vpc_zone_identifier       = [local.private_subnet_id]
 
-  instance_refresh {
+  instance_refresh {                #Rolling update
     strategy = "Rolling"
     preferences {
       min_healthy_percentage = 50
